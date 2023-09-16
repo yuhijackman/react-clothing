@@ -13,14 +13,14 @@ const INITIAL_STATE: CartState = {
 };
 
 export const cartReducer = (state = INITIAL_STATE, action: AnyAction) => {
-  if (setCartItems.match(action.type)) {
+  if (setCartItems.match(action)) {
     return {
       ...state,
       cartItems: action.payload
     };
   }
 
-  if (setIsCartOpen.match(action.type)) {
+  if (setIsCartOpen.match(action)) {
     return {
       ...state,
       isCartOpen: action.payload
