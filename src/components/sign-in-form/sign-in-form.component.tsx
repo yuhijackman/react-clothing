@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import {
   googleSignInStart,
   emailSignInStart
@@ -23,25 +23,17 @@ const SignInForm = () => {
     dispatch(googleSignInStart());
   };
 
-  const onChangeHandler = (event) => {
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       dispatch(emailSignInStart(email, password));
       setFormFields(DefaultFormFields);
     } catch (err) {
-      if (err.code === "auth/user-not-found") {
-        alert("User not found");
-        return;
-      }
-      if (err.code === "auth/wrong-password") {
-        alert("Password is wrong");
-        return;
-      }
       console.log(err);
     }
   };

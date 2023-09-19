@@ -10,8 +10,12 @@ import {
   selectCategoriesIsLoading
 } from "../../store/categories/category.selector";
 
+interface UseParams {
+  category: string;
+}
+
 const Category = () => {
-  const { category } = useParams();
+  const { category } = useParams<keyof UseParams>() as UseParams;
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);

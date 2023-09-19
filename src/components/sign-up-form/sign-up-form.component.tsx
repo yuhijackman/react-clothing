@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -18,12 +18,12 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields;
   const dispatch = useDispatch();
 
-  const onChangeHandler = (event) => {
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -34,6 +34,7 @@ const SignUpForm = () => {
     dispatch(signUpStart(email, password, displayName));
     setFormFields(DefaultFormFields);
   };
+
   return (
     <SignUpContainer>
       <h2>Don't have an account?</h2>
